@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace app
 {
@@ -17,6 +18,16 @@ namespace app
                     db.Books.Add(new Book { Name = "書籍B" });
                     db.Books.Add(new Book { Name = "書籍C" });
                     db.SaveChanges();
+
+                    // 書籍テーブルのレコードを更新(Update)
+                    // (書籍名を変更 書籍A-->書籍a)
+                    {
+                        if (db.Books.FirstOrDefault(b => b.Name == "書籍A") is Book book)
+                        {
+                            book.Name = "書籍a";
+                            db.SaveChanges();
+                        }
+                    }
 
                     db.Database.CommitTransaction();
                     Console.WriteLine($"DB更新成功");
