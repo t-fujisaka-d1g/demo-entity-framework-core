@@ -29,6 +29,17 @@ namespace app
                         }
                     }
 
+                    // 書籍テーブルのレコードを削除(Delete)
+                    // (書籍Cを削除)
+                    {
+
+                        if (db.Books.FirstOrDefault(b => b.Name == "書籍C") is Book book)
+                        {
+                            db.Books.Remove(book);
+                            db.SaveChanges();
+                        }
+                    }
+
                     db.Database.CommitTransaction();
                     Console.WriteLine($"DB更新成功");
                 }
