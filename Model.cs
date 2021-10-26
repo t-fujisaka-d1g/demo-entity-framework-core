@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
 namespace app
@@ -24,10 +25,16 @@ namespace app
         }
     }
 
+    [Table("X001BOOKS")]
     class Book
     {
+        [Column("X001BOOKID")]
         public int Id { get; set; }
+
+        [Column("X001BOOKNAME", TypeName = "nvarchar(128)")]
         public string Name { get; set; } = "";
+
+        [Column("X001RELEASEAT")]
         public DateTime? ReleasedAt { get; set; }
 
         // ナビゲーションプロパティ（Navigation Property）
@@ -39,11 +46,16 @@ namespace app
         }
     }
 
+    [Table("X002QRS")]
     class Qr
     {
-        [Key]
+        [Key, Column("X002QRCODE")]
         public string Code { get; set; } = "";
+
+        [Column("X002BOOKID_X001BOOKS")]
         public int BookId { get; set; }
+
+        [Column("X002URL")]
         public string Url { get; set; } = "";
 
         // ナビゲーションプロパティ（Navigation Property）
