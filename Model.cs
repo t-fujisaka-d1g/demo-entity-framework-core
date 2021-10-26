@@ -14,6 +14,14 @@ namespace app
             var connectionString = "server=localhost;database=DemoEntityFrameworkCore;uid=SA;pwd=Pass1234;";
             optionsBuilder.UseSqlServer(connectionString);
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Qr>()
+                .HasOne(qr => qr.Book)
+                .WithMany(book => book.Qrs)
+                .HasForeignKey(qr => qr.BookId)
+                .OnDelete(DeleteBehavior.Restrict);
+        }
     }
 
     class Book
