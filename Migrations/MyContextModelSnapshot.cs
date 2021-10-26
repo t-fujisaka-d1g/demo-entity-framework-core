@@ -37,41 +37,6 @@ namespace app.Migrations
 
                     b.ToTable("Books");
                 });
-
-            modelBuilder.Entity("app.Qr", b =>
-                {
-                    b.Property<string>("Code")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("BookId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Url")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Code");
-
-                    b.HasIndex("BookId");
-
-                    b.ToTable("Qrs");
-                });
-
-            modelBuilder.Entity("app.Qr", b =>
-                {
-                    b.HasOne("app.Book", "Book")
-                        .WithMany("Qrs")
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Book");
-                });
-
-            modelBuilder.Entity("app.Book", b =>
-                {
-                    b.Navigation("Qrs");
-                });
 #pragma warning restore 612, 618
         }
     }
