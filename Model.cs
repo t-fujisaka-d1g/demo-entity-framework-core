@@ -31,7 +31,7 @@ namespace app
         [Column("X001BOOKID")]
         public int Id { get; set; }
 
-        [Column("X001BOOKNAME")]
+        [Column("X001BOOKNAME", TypeName = "nvarchar(128)")]
         public string Name { get; set; } = "";
 
         [Column("X001RELEASEAT")]
