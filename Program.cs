@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace app
@@ -14,9 +15,14 @@ namespace app
                     db.Database.BeginTransaction();
 
                     // 書籍テーブルに追加(Insert)
-                    db.Books.Add(new Book { Name = "書籍A", ReleasedAt = DateTime.Today });
-                    db.Books.Add(new Book { Name = "書籍B", ReleasedAt = DateTime.Now });
-                    db.Books.Add(new Book { Name = "書籍C" });
+                    var book = new Book { Name = "書籍A", ReleasedAt = DateTime.Today };
+                    db.Books.Add(book);
+                    db.SaveChanges();
+
+                    book.Qrs = new List<Qr> {
+                        new Qr { Code = "00001", Url = "https://docs.microsoft.com/ja-jp/ef/" },
+                        new Qr { Code = "00002", Url = "https://docs.microsoft.com/ja-jp/ef/core/" }
+                    };
                     db.SaveChanges();
 
                     db.Database.CommitTransaction();
